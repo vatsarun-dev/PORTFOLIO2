@@ -8,8 +8,6 @@ import logger from "./logger.js";
  * Supports connection pooling, timeouts, and strict TLS verification.
  */
 const transportOptions: SMTPPool.Options = {
-  host: env.SMTP_HOST,
-  port: env.SMTP_PORT,
   secure: env.SMTP_SECURE, // true for 465, false for other ports (587 STARTTLS)
   pool: true,
   maxConnections: 5,
