@@ -10,10 +10,10 @@ export default function errorHandler(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ): Response {
-  const statusCode =
-    "statusCode" in err && typeof err.statusCode === "number"
-      ? err.statusCode
-      : StatusCodes.INTERNAL_SERVER_ERROR;
+  const isApiError = "statusCode" in err && typeof err.statusCode === "number";
+  const statusCode = isApiError
+    ? err.statusCode
+    : StatusCodes.INTERNAL_SERVER_ERROR;
 
   // Log technical error details safely through existing Pino logger
   logger.error(
@@ -27,11 +27,11 @@ export default function errorHandler(
     "Request error encountered",
   );
 
-  // For 500 Internal Server Errors, mask low-level technical/driver details from client
-  const isInternalError = statusCode === StatusCodes.INTERNAL_SERVER_ERROR;
-  const clientMessage = isInternalError
-    ? "Internal Server Error"
-    : err.message || "An unexpected error occurred";
+  // For controlled ApiErrors (e.g. mail service safe message), preserve the custom message.
+  // For unhandled raw exceptions (e.g. unexpected crashes), mask with generic message.
+  const clientMessage = isApiError && err.message
+    ? err.message
+    : "Internal Server Error";
 
   return res.status(statusCode).json({
     success: false,
