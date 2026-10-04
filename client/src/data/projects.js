@@ -1,0 +1,62 @@
+export const projects = [
+  {
+    id: 'deeptrust',
+    title: 'DeepTrust',
+    category: ['development', 'design', 'interaction'],
+    location: 'India',
+    services: 'AI Verification & RAG Pipeline',
+    year: '2026',
+    sub: 'Misinformation & AI media verifier',
+    tags: 'React · Node.js · RAG · Media Analysis',
+    link: 'https://deeptrust-project.netlify.app/',
+    github: 'https://github.com/vatsarun-dev/deepTrust',
+    svg: '/assets/work-deeptrust.svg',
+    image: '/assets/work-deeptrust.svg',
+    bgColor: '#0B1528'
+  },
+  {
+    id: 'coderoom',
+    title: 'CodeRoom',
+    category: ['development', 'interaction'],
+    location: 'India',
+    services: 'Real-Time Systems & Collaborative IDE',
+    year: '2025',
+    sub: 'Collaborative code editor & rooms',
+    tags: 'Socket.io · React · Node.js · MongoDB',
+    link: 'https://github.com/Developer-s-Hub',
+    github: 'https://github.com/Developer-s-Hub',
+    svg: '/assets/work-coderoom.svg',
+    image: '/assets/work-coderoom.svg',
+    bgColor: '#17102E'
+  },
+  {
+    id: 'devconnect',
+    title: 'DevConnect',
+    category: ['development', 'design'],
+    location: 'India',
+    services: 'Full Stack & Developer Community',
+    year: '2025',
+    sub: 'Developer social platform & hub',
+    tags: 'React · Redux · Node.js · Express',
+    link: 'https://hack-sprint-seven.vercel.app/',
+    github: 'https://github.com/vatsarun-dev',
+    svg: '/assets/work-devconnect.svg',
+    image: '/assets/work-devconnect.svg',
+    bgColor: '#06281A'
+  },
+  {
+    id: 'amazon-inventory',
+    title: 'Amazon Inventory',
+    category: ['development'],
+    location: 'India',
+    services: 'Dashboard & Stock Analytics',
+    year: '2024',
+    sub: 'Catalog management & stock tracker',
+    tags: 'React · JavaScript · REST APIs',
+    link: 'https://amazon-inventory-arun.netlify.app/',
+    github: 'https://github.com/vatsarun-dev',
+    svg: '/assets/work-amazon.svg',
+    image: '/assets/work-amazon.svg',
+    bgColor: '#1A1108'
+  }
+];
