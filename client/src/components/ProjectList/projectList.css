@@ -1,0 +1,168 @@
+/* ==================================================
+   PROJECT LIST INTERACTION (MATCHING LIVE SITE TYPOGRAPHY & TRANSITIONS)
+   ================================================== */
+
+.project-list-container {
+  width: 100%;
+  position: relative;
+  overflow: visible !important;
+}
+
+.project-work-items {
+  width: 100%;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: visible !important;
+}
+
+.work-item-row {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  overflow: visible !important;
+}
+
+/* Thin horizontal dividers */
+.work-item-row .stripe {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.project-work-items .stripe.last {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+/* Row link container with original live site spacing */
+.work-item-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: #1C1D20;
+  position: relative;
+  overflow: visible !important;
+  padding: calc(var(--section-padding) / 3.5) 0 calc(var(--section-padding) / 3) 0;
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+/* Live site color dimming transition:
+   When list has an active/hovered item, unhovered rows dim to 33% opacity */
+.project-work-items.has-active .work-item-row:not(.is-active) .work-item-link {
+  opacity: 0.33;
+}
+
+.project-work-items .work-item-row.is-active .work-item-link {
+  opacity: 1;
+}
+
+/* Column proportions matching live site */
+.work-item-link .title-col {
+  padding-left: calc(var(--container-padding) * 1);
+  width: 68%;
+}
+
+.work-item-link .meta-col {
+  width: 32%;
+  padding-left: var(--gap-padding);
+  padding-top: 1em;
+  padding-right: calc(var(--container-padding) * 0.5);
+  text-align: right;
+}
+
+/* Huge editorial Project Title matching live site */
+.work-item-link h4 {
+  font-family: 'Neue Montreal', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: calc(clamp(3.25em, 7vw, 8em) * 0.75);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #1C1D20;
+  margin: 0;
+  position: relative;
+  display: block;
+  overflow: visible;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s ease;
+  will-change: transform;
+}
+
+.work-item-link h4 span {
+  position: relative;
+  display: block;
+  padding: 0.1em 0;
+}
+
+/* Metadata text matching live site */
+.work-item-link p {
+  font-family: inherit;
+  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  color: rgba(28, 29, 32, 0.65);
+  margin: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  will-change: transform;
+}
+
+/* Hover typography shifts matching live site Dennis Snellenberg physics */
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+  .work-item-row.is-active .work-item-link h4 {
+    transform: translateX(calc(var(--container-padding) * -0.07)) rotate(0.001deg);
+  }
+
+  .work-item-row.is-active .work-item-link p {
+    transform: translateX(calc(var(--container-padding) * -0.05)) rotate(0.001deg);
+    opacity: 0.22; /* smoothly dims to keep complete visual room for the floating image */
+  }
+}
+
+/* ==================================================
+   FLOATING PREVIEW IMAGE (RIGHT-ALIGNED)
+   ================================================== */
+.project-preview-anchor {
+  position: absolute;
+  right: calc(var(--container-padding) * 0.8);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(280px, 24vw, 390px);
+  height: clamp(185px, 15.5vw, 245px);
+  pointer-events: none;
+  z-index: 35;
+  overflow: visible;
+  will-change: transform;
+}
+
+.project-preview-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+.project-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  background-color: #121316;
+  box-shadow: 
+    0 22px 48px -10px rgba(0, 0, 0, 0.22),
+    0 6px 16px -2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(28, 29, 32, 0.08);
+}
+
+/* ==================================================
+   MOBILE RESPONSIVENESS
+   ================================================== */
+@media (max-width: 1024px) {
+  .project-preview-anchor {
+    display: none;
+  }
+}

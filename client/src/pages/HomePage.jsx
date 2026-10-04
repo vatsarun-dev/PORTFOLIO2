@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useNavigation } from '../context/NavigationContext.jsx';
 import { projects } from '../data/projects.js';
 import { personalInfo } from '../data/info.js';
+import { ProjectList } from '../components/ProjectList/ProjectList.jsx';
 
 export const HomePage = () => {
   const { navigateTo } = useNavigation();
@@ -9,37 +10,6 @@ export const HomePage = () => {
 
   return (
     <>
-      {/* Floating project hover preview elements */}
-      <div className="mouse-pos-list-image no-select">
-        <div className="mouse-pos-list-image-bounce overlay">
-          <div className="float-image-wrap">
-            {projects.map((t, index) => (
-              <li
-                key={t.id}
-                className="mouse-pos-list-image-inner"
-                data-project={t.id}
-                data-index={index}
-              >
-                <div
-                  className="overlay overlay-image"
-                  style={{
-                    backgroundImage: `url(${t.image})`,
-                    backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundColor: t.bgColor
-                  }}
-                ></div>
-              </li>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="mouse-pos-list-btn no-select"></div>
-      <div className="mouse-pos-list-span no-select">
-        <p>View</p>
-      </div>
-
       <div className="main-wrap" id="home">
         {/* Hero Header */}
         <header className="section home-header theme-dark" ref={heroRef}>
@@ -189,41 +159,19 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Section: Work Grid (Interactive hover items) */}
+        {/* Section: Work Grid (Interactive hover items on desktop) */}
         <section className="section work-grid large-work-grid" id="work">
           <div className="container">
-            <div className="grid-sub-title reveal">
+            <div className="grid-sub-title reveal in-view">
               <div className="flex-col">
                 <h5>Recent work</h5>
               </div>
             </div>
-            <ul className="work-items mouse-pos-list-image-wrap">
-              {projects.map((t, index) => (
-                <li key={t.id} data-project={t.id} data-index={index} className="reveal">
-                  <div className="stripe animate"></div>
-                  <a
-                    href={t.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="row"
-                  >
-                    <div className="flex-col">
-                      <h4>
-                        <span>{t.title}</span>
-                      </h4>
-                    </div>
-                    <div className="flex-col animate">
-                      <p>{t.services}</p>
-                    </div>
-                  </a>
-                </li>
-              ))}
-              <div className="stripe last animate"></div>
-            </ul>
+            <ProjectList items={projects} />
           </div>
         </section>
 
-        {/* Section: Work Tiles (Visual mockups) */}
+        {/* Section: Work Tiles (Visual mockups on mobile/tablet) */}
         <section className="section work-tiles work-tiles-home">
           <div className="container">
             <ul>
