@@ -7,29 +7,19 @@ import logger from "./logger.js";
  * Production-ready reusable Nodemailer transporter with connection pooling.
  * Supports connection pooling, timeouts, and strict TLS verification.
  */
-const transportOptions: SMTPPool.Options = {
-  service:"gmail",
-  secure: env.SMTP_SECURE,
-  pool: true,
-  maxConnections: 5,
-  maxMessages: 100,
-  connectionTimeout: 10_000, // 10s connection timeout
-  greetingTimeout: 10_000, // 10s greeting timeout
-  socketTimeout: 15_000, // 15s socket inactivity timeout
-  auth:
-    env.SMTP_USER && env.SMTP_PASSWORD
-      ? {
-          user: env.SMTP_USER,
-          pass: env.SMTP_PASSWORD,
-        }
-      : undefined,
+
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth:{
+    user:env.SMTP_USER,
+    pass:env.SMTP_PASSWORD
+  },
   tls: {
     minVersion: "TLSv1.2",
     rejectUnauthorized: true, // Strict certificate validation
   },
-};
-
-const transporter: Transporter = nodemailer.createTransport(transportOptions);
+});
 
 /**
  * Verify transporter connection configuration.
