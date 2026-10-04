@@ -8,7 +8,7 @@ export const Navigation = ({ onToggleMenu }) => {
   const path = location.pathname.toLowerCase();
 
   const isDark = path === '/' || path === '/index.html' || path.includes('contact');
-  const isWork = path.includes('work');
+  const isProjects = path.includes('project') || path.includes('work');
   const isAbout = path.includes('about');
   const isContact = path.includes('contact');
 
@@ -52,19 +52,19 @@ export const Navigation = ({ onToggleMenu }) => {
         </div>
 
         <ul className="links-wrap">
-          <li className={`btn btn-link ${isWork ? 'active' : ''}`}>
+          <li className={`btn btn-link ${isProjects ? 'active' : ''}`}>
             <a
-              href="/work"
+              href="/projects"
               onClick={(e) => {
                 e.preventDefault();
-                navigateTo('/work', 'Work');
+                navigateTo('/projects', 'Projects');
               }}
               className="btn-click magnetic"
               data-strength="20"
               data-strength-text="10"
             >
               <span className="btn-text">
-                <span className="btn-text-inner">Work</span>
+                <span className="btn-text-inner">Projects</span>
               </span>
             </a>
           </li>

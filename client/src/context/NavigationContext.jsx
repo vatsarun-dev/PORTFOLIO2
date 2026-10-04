@@ -9,7 +9,7 @@ export const useNavigation = () => {
 
 export const getSectionTitle = (path) => {
   const p = (path || '').toLowerCase();
-  if (p.includes('work')) return 'Work';
+  if (p.includes('project') || p.includes('work')) return 'Projects';
   if (p.includes('about')) return 'About';
   if (p.includes('contact')) return 'Contact';
   return 'Home';

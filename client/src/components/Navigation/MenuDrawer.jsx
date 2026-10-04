@@ -14,7 +14,7 @@ export const MenuDrawer = ({ onClose }) => {
 
   const path = location.pathname.toLowerCase();
   const isHome = path === '/' || path === '/index.html';
-  const isWork = path.includes('work');
+  const isProjects = path.includes('project') || path.includes('work');
   const isAbout = path.includes('about');
   const isContact = path.includes('contact');
 
@@ -46,17 +46,17 @@ export const MenuDrawer = ({ onClose }) => {
                   </span>
                 </a>
               </li>
-              <li className={`btn btn-link ${isWork ? 'active' : ''}`}>
+              <li className={`btn btn-link ${isProjects ? 'active' : ''}`}>
                 <a
-                  href="/work"
+                  href="/projects"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNav('/work', 'Work');
+                    handleNav('/projects', 'Projects');
                   }}
                   className="btn-click magnetic"
                 >
                   <span className="btn-text">
-                    <span className="btn-text-inner">Work</span>
+                    <span className="btn-text-inner">Projects</span>
                   </span>
                 </a>
               </li>

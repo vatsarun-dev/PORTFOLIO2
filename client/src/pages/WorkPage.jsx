@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { projects } from '../data/projects.js';
+import { ShowcaseGrid } from '../components/ShowcaseCard/ShowcaseCard.jsx';
+import { ProjectList } from '../components/ProjectList/ProjectList.jsx';
 
 export const WorkPage = () => {
   const [filter, setFilter] = useState('all');
@@ -14,38 +16,7 @@ export const WorkPage = () => {
 
   return (
     <>
-      {/* Floating project hover preview elements */}
-      <div className="mouse-pos-list-image no-select">
-        <div className="mouse-pos-list-image-bounce overlay">
-          <div className="float-image-wrap">
-            {projects.map((item, index) => (
-              <li
-                key={item.id}
-                className="mouse-pos-list-image-inner"
-                data-project={item.id}
-                data-index={index}
-              >
-                <div
-                  className="overlay overlay-image"
-                  style={{
-                    backgroundImage: `url(${item.svg})`,
-                    backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundColor: item.bgColor
-                  }}
-                ></div>
-              </li>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="mouse-pos-list-btn no-select"></div>
-      <div className="mouse-pos-list-span no-select">
-        <p>View</p>
-      </div>
-
-      <div className="main-wrap" id="work">
+      <div className="main-wrap" id="projects">
         <header className="section default-header work-header">
           <div className="container medium">
             <div className="row">
@@ -168,101 +139,17 @@ export const WorkPage = () => {
             style={{ display: viewMode === 'rows' ? 'block' : 'none' }}
           >
             <div className="container">
-              <div className="grid-sub-title">
-                <div className="flex-col">
-                  <h5>Project</h5>
-                </div>
-                <div className="flex-col">
-                  <h5>Location</h5>
-                </div>
-                <div className="flex-col">
-                  <h5>Services</h5>
-                </div>
-                <div className="flex-col">
-                  <h5>Year</h5>
-                </div>
-              </div>
-              <ul className="work-items mouse-pos-list-image-wrap all-active">
-                {filteredProjects.map((item, index) => (
-                  <li
-                    key={item.id}
-                    className={`visible hover-row ${item.category.join(' ')}`}
-                    data-project={item.id}
-                    data-index={index}
-                  >
-                    <a href={item.link} target="_blank" rel="noopener noreferrer">
-                      <div className="stripe animate"></div>
-                      <div className="row">
-                        <div className="flex-col">
-                          <h4>
-                            <span>{item.title}</span>
-                          </h4>
-                        </div>
-                        <div className="flex-col">
-                          <p>{item.location}</p>
-                        </div>
-                        <div className="flex-col">
-                          <p>{item.services}</p>
-                        </div>
-                        <div className="flex-col">
-                          <p>{item.year}</p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                ))}
-                <div className="stripe last animate"></div>
-              </ul>
+              <ProjectList items={filteredProjects} />
             </div>
           </section>
 
-          {/* Grid Columns Part */}
+          {/* Grid Columns Part (Framer Showcase Cards) */}
           <section
-            className={`section work-tiles grid-fade grid-columns-part ${viewMode === 'columns' ? 'visible grid-fade-in' : ''}`}
+            className={`section work-showcase-section grid-fade grid-columns-part ${viewMode === 'columns' ? 'visible grid-fade-in' : ''}`}
             style={{ display: viewMode === 'columns' ? 'block' : 'none' }}
           >
             <div className="container">
-              <ul>
-                {filteredProjects.map((item, index) => (
-                  <li
-                    key={item.id}
-                    className={`${item.category.join(' ')} visible`}
-                    data-project={item.id}
-                    data-index={index}
-                  >
-                    <div className="single-tile-wrap">
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="row">
-                        <div className="flex-col">
-                          <div className="tile-image">
-                            <div
-                              className="overlay overlay-image"
-                              style={{
-                                backgroundImage: `url(${item.svg})`,
-                                backgroundColor: item.bgColor,
-                                backgroundPosition: 'center center',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundSize: 'cover'
-                              }}
-                            ></div>
-                          </div>
-                        </div>
-                        <div className="flex-col">
-                          <h4>
-                            <span>{item.title}</span>
-                          </h4>
-                          <div className="stripe"></div>
-                        </div>
-                        <div className="flex-col">
-                          <p>{item.sub}</p>
-                        </div>
-                        <div className="flex-col">
-                          <p>{item.tags}</p>
-                        </div>
-                      </a>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <ShowcaseGrid items={filteredProjects} />
             </div>
           </section>
         </section>

@@ -164,7 +164,7 @@ export const HomePage = () => {
           <div className="container">
             <div className="grid-sub-title reveal in-view">
               <div className="flex-col">
-                <h5>Recent work</h5>
+                <h5>Recent projects</h5>
               </div>
             </div>
             <ProjectList items={projects} />
@@ -218,16 +218,16 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Center Button: More Work */}
+        {/* Center Button: More Projects */}
         <section className="section center-grid-btn center-grid-btn-home">
           <div className="container">
             <div className="grid-after-btn reveal in-view">
               <div className="btn btn-normal">
                 <a
-                  href="/work"
+                  href="/projects"
                   onClick={(t) => {
                     t.preventDefault();
-                    navigateTo('/work', 'Work');
+                    navigateTo('/projects', 'Projects');
                   }}
                   className="btn-click magnetic"
                   data-strength="25"
@@ -236,7 +236,7 @@ export const HomePage = () => {
                   <div className="btn-fill"></div>
                   <span className="btn-text">
                     <span className="btn-text-inner change">
-                      More work
+                      More projects
                       <div className="count-nr">{projects.length}</div>
                     </span>
                   </span>
