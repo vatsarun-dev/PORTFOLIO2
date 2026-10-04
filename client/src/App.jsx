@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { useLenisScroll } from './hooks/useLenisScroll.js';
 import { usePageInteractions } from './hooks/usePageInteractions.js';
 import { Loader } from './components/Loader/Loader.jsx';
+import { SplashCursor } from './components/SplashCursor.jsx';
 import { Navigation } from './components/Navigation/Navigation.jsx';
 import { MenuDrawer } from './components/Navigation/MenuDrawer.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
@@ -41,6 +42,7 @@ export const App = () => {
     <>
       <div className="no-scroll-overlay"></div>
       <Loader />
+      <SplashCursor />
       <main className="main no-touch">
         <Navigation onToggleMenu={toggleMenu} />
         <MenuDrawer onClose={closeMenu} />

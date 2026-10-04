@@ -1,13 +1,11 @@
 import React, { useRef } from 'react';
 import { useNavigation } from '../context/NavigationContext.jsx';
-import { DitherCursor } from '../components/DitherCursor.jsx';
 import { projects } from '../data/projects.js';
 import { personalInfo } from '../data/info.js';
 
 export const HomePage = () => {
   const { navigateTo } = useNavigation();
   const heroRef = useRef(null);
-  const photoRef = useRef(null);
 
   return (
     <>
@@ -46,18 +44,8 @@ export const HomePage = () => {
         {/* Hero Header */}
         <header className="section home-header theme-dark" ref={heroRef}>
           <div className="hero-scale">
-            {/* Custom Standalone Dither Cursor Effect (Black retro digital halftone dithering) */}
-            <DitherCursor
-              containerRef={heroRef}
-              photoRef={photoRef}
-              particleSize={3.5}
-              gridSpacing={6}
-              baseRadius={140}
-              coreRadius={60}
-            />
-
             {/* Center personal portrait image */}
-            <div className="personal-image-wrap" ref={photoRef}>
+            <div className="personal-image-wrap">
               <div
                 className="overlay overlay-image"
                 style={{
