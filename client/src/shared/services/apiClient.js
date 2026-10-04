@@ -3,7 +3,10 @@
  * Handles standardized requests, error handling, and payload parsing.
  */
 class ApiClient {
-  constructor(baseUrl = import.meta.env.VITE_API_BASE_URL || '') {
+  constructor(
+    baseUrl = import.meta.env.VITE_API_BASE_URL ||
+      (import.meta.env.PROD ? 'https://portfolio2-3qya.onrender.com' : '')
+  ) {
     this.baseUrl = baseUrl;
   }
 

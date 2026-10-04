@@ -17,6 +17,7 @@ const envSchema = z.object({
     .number()
     .default(constant.MAX_CONCURRENT_REQUESTS),
   TRUST_PROXY: z.string().default(constant.TRUST_PROXY),
+  CLIENT_URL: z.string().default(constant.CLIENT_URL),
   SMTP_HOST: z.string().default(constant.SMTP_HOST),
   SMTP_PORT: z.coerce.number().default(constant.SMTP_PORT),
   SMTP_SECURE: z

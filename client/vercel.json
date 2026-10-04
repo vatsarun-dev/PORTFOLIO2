@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://portfolio2-3qya.onrender.com/api/:path*"
+    },
+    {
+      "source": "/health/:path*",
+      "destination": "https://portfolio2-3qya.onrender.com/health/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

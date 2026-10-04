@@ -39,10 +39,28 @@ export default function securityMiddleware(app: Application): void {
   app.use(cookieParser());
 
   // 5. Cross-Origin Resource Sharing (CORS)
+  const allowedOrigins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://arun-portfolio-lake-five.vercel.app",
+    env.CLIENT_URL,
+  ].filter(Boolean);
+
   app.use(
     cors({
-      origin: ["http://localhost:3000", "http://localhost:3001"],
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like curl, server-to-server, or mobile)
+        if (!origin) return callback(null, true);
+        const isExplicitlyAllowed = allowedOrigins.includes(origin);
+        const isVercelSubdomain = /^https:\/\/([a-z0-9-]+\.)?vercel\.app$/.test(origin);
+        if (isExplicitlyAllowed || isVercelSubdomain) {
+          return callback(null, true);
+        }
+        return callback(null, false);
+      },
       credentials: true,
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization", "X-Request-Id"],
     }),
   );
 

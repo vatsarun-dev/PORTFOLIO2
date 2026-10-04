@@ -5,6 +5,7 @@ export interface AppConfigConstant {
   MONGO_URL: string;
   MAX_CONCURRENT_REQUESTS: number;
   TRUST_PROXY: string;
+  CLIENT_URL: string;
   SMTP_HOST: string;
   SMTP_PORT: number;
   SMTP_SECURE: boolean;
@@ -25,6 +26,7 @@ const defaultConstant: AppConfigConstant = {
   MONGO_URL: "mongodb://0.0.0.0/constant",
   MAX_CONCURRENT_REQUESTS: 100,
   TRUST_PROXY: "1",
+  CLIENT_URL: "https://arun-portfolio-lake-five.vercel.app",
   SMTP_HOST: "smtp.example.com",
   SMTP_PORT: 587,
   SMTP_SECURE: false,
