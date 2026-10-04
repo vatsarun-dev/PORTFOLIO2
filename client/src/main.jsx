@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { NavigationProvider } from './context/NavigationContext.jsx';
-import App from './App.jsx';
-import './styles.css';
+import { RouterProvider } from 'react-router-dom';
+import { AppProviders } from './app/providers/AppProviders';
+import { router } from './app/router';
+import './shared/styles/styles.css';
 
 const rootEl = document.getElementById('root');
 if (rootEl) {
   ReactDOM.createRoot(rootEl).render(
     <React.StrictMode>
-      <BrowserRouter>
-        <NavigationProvider>
-          <App />
-        </NavigationProvider>
-      </BrowserRouter>
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>
     </React.StrictMode>
   );
 }

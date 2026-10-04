@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.13.0",
     "@vitejs/plugin-react": "^4.7.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
+    "react-redux": "^9.3.0",
     "react-router-dom": "^7.18.4",
     "three": "^0.160.0"
   },
