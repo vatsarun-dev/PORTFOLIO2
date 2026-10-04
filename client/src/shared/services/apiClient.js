@@ -1,9 +1,9 @@
 /**
  * Base API client configuration and helper utilities.
- * Handles standardized requests, simulated endpoints, and error handling.
+ * Handles standardized requests, error handling, and payload parsing.
  */
 class ApiClient {
-  constructor(baseUrl = '') {
+  constructor(baseUrl = import.meta.env.VITE_API_BASE_URL || '') {
     this.baseUrl = baseUrl;
   }
 
@@ -15,13 +15,28 @@ class ApiClient {
     };
 
     try {
-      const response = await fetch(url, { ...options, headers });
+      const response = await fetch(url, {
+        credentials: 'include',
+        ...options,
+        headers,
+      });
+
+      const data = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const message =
+          data?.message ||
+          (Array.isArray(data?.errors) ? data.errors[0]?.msg : null) ||
+          `HTTP error! status: ${response.status}`;
+        const error = new Error(message);
+        error.status = response.status;
+        error.data = data;
+        throw error;
       }
-      return await response.json();
+
+      return data;
     } catch (error) {
-      console.warn(`[ApiClient] Request to ${url} encountered an error:`, error);
+      console.warn(`[ApiClient] Request to ${url} failed:`, error);
       throw error;
     }
   }
@@ -41,3 +56,4 @@ class ApiClient {
 
 export const apiClient = new ApiClient();
 export default apiClient;
+

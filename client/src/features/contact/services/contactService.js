@@ -1,8 +1,9 @@
+import apiClient from '../../../shared/services/apiClient';
+
 /**
  * Contact Service Layer
- * Manages message dispatch, validation, honeypot traps, and feedback responses.
+ * Manages message dispatch, validation, honeypot traps, and backend SMTP communication.
  */
-
 export const contactService = {
   submitMessage: async (formData) => {
     // 1. Honeypot check for spam bots
@@ -15,24 +16,43 @@ export const contactService = {
       };
     }
 
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const company = formData.get('company') || 'N/A';
+    const service = formData.get('service') || 'General Inquiry';
+    const clientMessage = formData.get('message') || '';
+
+    // Format professional inquiry subject and body for the portfolio owner
+    const subject = `[Portfolio Inquiry] ${service} - from ${name}`;
+    const formattedMessage = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Company: ${company}`,
+      `Service Requested: ${service}`,
+      ``,
+      `Message:`,
+      clientMessage,
+    ].join('\n');
+
     const payload = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      service: formData.get('service'),
-      message: formData.get('message'),
+      name,
+      replyTo: email,
+      subject,
+      message: formattedMessage,
     };
 
-    // 2. Simulated async dispatch (or production endpoint integration)
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    // 2. Real dispatch to backend API (/api/mail/send)
+    const response = await apiClient.post('/api/mail/send', payload);
 
     return {
       success: true,
-      data: payload,
+      data: response.data,
       message:
-        'Thank You! Message prepared. Feel free to connect directly on LinkedIn or GitHub as well.',
+        response.message ||
+        'Thank you! Your message has been sent successfully. I will get back to you shortly.',
     };
   },
 };
 
 export default contactService;
+

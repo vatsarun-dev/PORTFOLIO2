@@ -10,7 +10,8 @@ export const submitContactForm = createAsyncThunk(
     } catch (err) {
       console.error('[ContactSlice] Submission failed:', err);
       return rejectWithValue(
-        'Failed to send message. Please connect directly via LinkedIn or GitHub.'
+        err?.message ||
+          'Failed to send message. Please connect directly via LinkedIn or GitHub.'
       );
     }
   }
