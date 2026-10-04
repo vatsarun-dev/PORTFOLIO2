@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigation } from '../context/NavigationContext.jsx';
+import { HeroFluidCursor } from '../components/HeroFluidCursor.jsx';
 import { projects } from '../data/projects.js';
 import { personalInfo } from '../data/info.js';
 
 export const HomePage = () => {
   const { navigateTo } = useNavigation();
+  const heroRef = useRef(null);
 
   return (
     <>
@@ -41,8 +43,11 @@ export const HomePage = () => {
 
       <div className="main-wrap" id="home">
         {/* Hero Header */}
-        <header className="section home-header theme-dark">
+        <header className="section home-header theme-dark" ref={heroRef}>
           <div className="hero-scale">
+            {/* Fluid Ink Cursor Effect (Hero background layer) */}
+            <HeroFluidCursor containerRef={heroRef} />
+
             {/* Center personal portrait image */}
             <div className="personal-image-wrap">
               <div
