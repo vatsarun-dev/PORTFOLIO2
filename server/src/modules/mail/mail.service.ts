@@ -24,7 +24,66 @@ export interface MailSendResult {
 
 export default class MailService {
   /**
-   * Dispatches an email via the reusable SMTP transporter.
+   * Dispatches an email via Brevo transactional API (HTTPS port 443).
+   * Reliable across cloud hosting providers and firewalls.
+   */
+  private async sendMailViaBrevo(options: SendMailOptions): Promise<MailSendResult> {
+    const { to, subject, html, text, replyTo } = options;
+
+    const senderEmail = env.SMTP_USER || "vatsarun58@gmail.com";
+    const senderName = "Arun Vats Portfolio";
+
+    const payload = {
+      sender: {
+        name: senderName,
+        email: senderEmail,
+      },
+      to: [
+        {
+          email: to,
+          name: options.to.split("@")[0] || "Recipient",
+        },
+      ],
+      replyTo: replyTo ? { email: replyTo } : undefined,
+      subject,
+      htmlContent: html || (text ? `<pre>${text}</pre>` : undefined),
+      textContent: text,
+    };
+
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "api-key": env.BREVO_API_KEY,
+        "accept": "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = (await response.json().catch(() => null)) as {
+      messageId?: string;
+      message?: string;
+    } | null;
+
+    if (!response.ok) {
+      const errMsg = data?.message || `Brevo API returned status ${response.status}`;
+      throw new Error(errMsg);
+    }
+
+    logger.info(
+      { messageId: data?.messageId, recipient: to },
+      "Email dispatched successfully via Brevo API (HTTPS)",
+    );
+
+    return {
+      success: true,
+      messageId: data?.messageId,
+      accepted: [to],
+    };
+  }
+
+  /**
+   * Dispatches an email via Brevo service (HTTPS) or reusable SMTP transporter.
    * Ensures technical errors are logged securely and never leaked directly to clients.
    */
   async sendMail(options: SendMailOptions): Promise<MailSendResult> {
@@ -37,6 +96,28 @@ export default class MailService {
       );
     }
 
+    // 1. If Brevo API key is configured, dispatch via HTTPS
+    if (env.BREVO_API_KEY) {
+      try {
+        return await this.sendMailViaBrevo(options);
+      } catch (error: unknown) {
+        logger.error(
+          {
+            recipient: to,
+            subject,
+            err: error instanceof Error ? error.message : String(error),
+          },
+          "Brevo email dispatch failed",
+        );
+
+        throw new ApiError(
+          "Failed to send email. Please verify mail configuration or try again later.",
+          StatusCodes.INTERNAL_SERVER_ERROR,
+        );
+      }
+    }
+
+    // 2. Fallback to Nodemailer SMTP transporter
     const mailOptions = {
       from: env.SMTP_FROM,
       to,

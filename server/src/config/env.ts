@@ -30,6 +30,7 @@ const envSchema = z.object({
   SMTP_USER: z.string().default(constant.SMTP_USER),
   SMTP_PASSWORD: z.string().default(constant.SMTP_PASSWORD),
   SMTP_FROM: z.string().default(constant.SMTP_FROM),
+  BREVO_API_KEY: z.string().default(constant.BREVO_API_KEY),
 });
 
 export type EnvConfig = z.infer<typeof envSchema>;

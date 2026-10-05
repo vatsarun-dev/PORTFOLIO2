@@ -12,6 +12,7 @@ export interface AppConfigConstant {
   SMTP_USER: string;
   SMTP_PASSWORD: string;
   SMTP_FROM: string;
+  BREVO_API_KEY: string;
 }
 
 export interface AppCookieConstant {
@@ -33,6 +34,7 @@ const defaultConstant: AppConfigConstant = {
   SMTP_USER: "",
   SMTP_PASSWORD: "",
   SMTP_FROM: "no-reply@example.com",
+  BREVO_API_KEY: "",
 };
 
 export const app_constant: AppCookieConstant = {

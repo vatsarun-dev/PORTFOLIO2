@@ -25,6 +25,11 @@ const transporter = nodemailer.createTransport({
  * Verify transporter connection configuration.
  */
 export async function verifyTransporter(): Promise<boolean> {
+  if (env.BREVO_API_KEY) {
+    logger.info("Brevo API service is active for email delivery (HTTPS port 443).");
+    return true;
+  }
+
   if (!env.SMTP_USER || !env.SMTP_PASSWORD) {
     logger.warn(
       "SMTP credentials are not configured in environment. Outgoing emails will require valid SMTP credentials.",
