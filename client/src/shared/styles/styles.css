@@ -307,15 +307,70 @@
   }
 
   /* ==========================================
-     IMAGE 2: Home Page Hero & "About Me" Fixes
+     IMAGE 1: Hero Header Mobile Designing Fixes
      ========================================== */
   .home-header {
-    min-height: 85vh !important;
-    max-height: 90vh !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    background: var(--color-gray) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
+
+  /* Completely hide cut-off wireframe globe hanger on mobile */
+  .home-header .hanger {
+    display: none !important;
+  }
+
+  /* Remove any white bar leaking into the bottom of the hero section */
+  .home-header .white-block {
+    display: none !important;
+  }
+
+  .home-header .hero-scale {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .home-header .personal-image-wrap {
+    height: 100% !important;
+    width: 100% !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .home-header .personal-image-wrap .overlay-image {
+    background-size: contain !important;
+    background-position: center bottom !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .home-header .big-name {
+    position: absolute !important;
+    bottom: clamp(14vh, 18dvh, 22vh) !important;
+    left: 0 !important;
+    width: 100% !important;
+    padding-bottom: 0 !important;
+  }
+
+  .home-header .container {
+    padding-bottom: clamp(3vh, 5dvh, 7vh) !important;
+  }
+
+  /* ==========================================
+     IMAGE 2: Home Intro White Space Utilization
+     ========================================== */
   .home-intro {
-    padding-top: clamp(2.5em, 7vh, 4em) !important;
-    padding-bottom: clamp(3em, 8vh, 5em) !important;
+    padding-top: clamp(2.2em, 5vh, 3.2em) !important;
+    padding-bottom: 2em !important;
     background: var(--color-white) !important;
   }
   .home-intro .flex-col:nth-child(1) h4 {
@@ -325,25 +380,38 @@
   }
   .home-intro .flex-col:nth-child(2) {
     padding-top: 0.5em !important;
-    align-items: flex-start !important;
+    width: 100% !important;
   }
   .home-intro .flex-col:nth-child(2) p {
     font-size: 1.05em !important;
     line-height: 1.6 !important;
-    margin-bottom: 1.8em !important;
+    margin-bottom: 1.5em !important;
   }
   .home-intro .flex-col:nth-child(2) .btn-wrap-intro {
     position: relative !important;
-    top: unset !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-top: 1.5em !important;
+    transform: none !important;
     bottom: unset !important;
     right: unset !important;
-    transform: none !important;
-    margin-top: 0.5em !important;
-    align-self: flex-start !important;
+    top: unset !important;
+  }
+  .home-intro .btn-round {
+    margin: 0 auto !important;
+    align-self: center !important;
   }
   .home-intro .btn-round .btn-click {
     width: clamp(7.5em, 28vw, 8.5em) !important;
     height: clamp(7.5em, 28vw, 8.5em) !important;
+  }
+  .mobile-showcase-section {
+    padding-top: 1.25em !important;
+  }
+  .mobile-showcase-section .grid-sub-title {
+    padding-bottom: 0.75rem !important;
   }
 
   /* CRITICAL: Force all animated reveal content to remain 100% visible on mobile */
