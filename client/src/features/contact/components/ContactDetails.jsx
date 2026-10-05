@@ -6,7 +6,7 @@ import React from 'react';
  */
 export const ContactDetails = ({ authorInfo }) => {
   return (
-    <div className="flex-col">
+    <div className="flex-col contact-details-wrapper">
       <h5>Contact Details</h5>
       <ul className="links-wrap">
         <li className="btn btn-link btn-link-external">

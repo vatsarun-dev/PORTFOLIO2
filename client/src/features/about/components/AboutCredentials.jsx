@@ -14,37 +14,7 @@ export const AboutCredentials = ({
     <section className="section about-awwwards">
       <div className="container medium">
         <div className="row">
-          {/* Visual credential badge */}
-          <div className="flex-col">
-            <div className="single-image" style={{ minHeight: '380px', position: 'relative' }}>
-              <div className="about-abstract-graphic">
-                <div className="graphic-corner-tag">
-                  CREDENTIALS // ACADEMIC &amp; TECH
-                </div>
-                <div className="graphic-center-visual">
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '3rem', fontWeight: 700, letterSpacing: '-0.05em', color: '#FFFFFF' }}>
-                      8.34
-                    </div>
-                    <div style={{ fontSize: '0.85rem', color: '#455CE9', letterSpacing: '0.1em', marginTop: '0.25rem' }}>
-                      CGPA / 10.0 (AKTU)
-                    </div>
-                  </div>
-                </div>
-                <div className="graphic-footer-info">
-                  <div>
-                    <h4>B.Tech in CSE</h4>
-                    <p>Bharat Institute of Technology</p>
-                  </div>
-                  <div>
-                    <p>2023 — 2027</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-col">
+          <div className="flex-col about-credentials-col">
             <div className="awwwards-badge"></div>
             <h2>
               Education &amp;<br />Achievements

@@ -14,8 +14,8 @@ export const ContactPage = () => {
       <header className="section default-header contact-header theme-dark">
         <div className="container medium">
           <ContactHeader />
-          <div className="row once-in">
-            <div className="flex-col">
+          <div className="row once-in contact-main-row">
+            <div className="flex-col contact-form-wrapper">
               <ContactForm
                 status={status}
                 feedback={feedback}

@@ -6,17 +6,34 @@ import React from 'react';
  */
 export const ContactHeader = () => {
   return (
-    <div className="row once-in">
-      <div className="flex-col">
+    <div className="row once-in contact-header-row">
+      <div className="flex-col contact-header-title-col">
         <h1>
-          <span>
-            <div className="profile-picture"></div> Let's start a{' '}
+          <span className="contact-title-line">
+            <span
+              className="profile-picture contact-hero-photo"
+              aria-hidden="true"
+              style={{
+                backgroundImage: "url('/assets/arun-vats.png')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 18%',
+              }}
+            />
+            {" Let's start a"}
           </span>
           <span>project together</span>
         </h1>
       </div>
-      <div className="flex-col">
-        <div className="profile-picture"></div>
+      <div className="flex-col contact-header-arrow-col">
+        <div
+          className="profile-picture contact-hero-photo-desktop"
+          aria-hidden="true"
+          style={{
+            backgroundImage: "url('/assets/arun-vats.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 18%',
+          }}
+        />
         <div className="arrow">
           <svg
             width="14px"

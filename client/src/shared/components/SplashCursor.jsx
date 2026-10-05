@@ -1,5 +1,4 @@
-'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function SplashCursor({
   SIM_RESOLUTION = 128,
@@ -23,8 +22,22 @@ function SplashCursor({
 }) {
   const canvasRef = useRef(null);
   const animationFrameId = useRef(null);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth <= 768 || window.matchMedia('(max-width: 768px)').matches;
+  });
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768 || window.matchMedia('(max-width: 768px)').matches);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (window.innerWidth <= 768 || window.matchMedia('(max-width: 768px)').matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -1269,6 +1282,10 @@ function SplashCursor({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div

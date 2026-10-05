@@ -33,13 +33,26 @@ const AppContent = () => {
     setMenuOpen(false);
   }, [location.pathname]);
 
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth <= 768 || window.matchMedia('(max-width: 768px)').matches;
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768 || window.matchMedia('(max-width: 768px)').matches);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const isContactPage = location.pathname.includes('contact');
 
   return (
     <>
       <div className="no-scroll-overlay"></div>
       <Loader />
-      <SplashCursor />
+      {!isMobile && <SplashCursor />}
       <main className="main no-touch">
         <Navigation onToggleMenu={toggleMenu} />
         <MenuDrawer onClose={closeMenu} />

@@ -42,13 +42,14 @@ export function usePageInteractions() {
               }
             } else if (
               target.classList.contains('span-lines') &&
-              entry.boundingClientRect.top > 0
+              entry.boundingClientRect.top > 0 &&
+              window.innerWidth > 768
             ) {
               target.classList.remove('in-view');
             }
           });
         },
-        { threshold: [0, 0.1], rootMargin: '0px 0px -5% 0px' }
+        { threshold: [0, 0.1], rootMargin: '0px 0px 80px 0px' }
       );
       revealElements.forEach((el) => observer.observe(el));
     } else {
@@ -58,7 +59,7 @@ export function usePageInteractions() {
     setTimeout(() => {
       revealElements.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+        if (window.innerWidth <= 768 || (rect.top < window.innerHeight * 1.15 && rect.bottom > -80)) {
           el.classList.add('in-view');
         }
       });
@@ -391,12 +392,16 @@ export function usePageInteractions() {
       }
     }
 
-    // 7. Parallax Offset for About Me Button
+    // 7. Parallax Offset for About Me Button (Desktop only)
     const introSection = document.querySelector('.home-intro');
     const introBtn = introSection ? introSection.querySelector('.btn-wrap-intro') : null;
     if (introSection && introBtn) {
       let isRafPending = false;
       const calcIntroParallax = () => {
+        if (window.innerWidth <= 768) {
+          introBtn.style.transform = '';
+          return;
+        }
         const rect = introSection.getBoundingClientRect();
         const winH = window.innerHeight;
         const totalSpan = winH * 0.85 + rect.height * 0.5;
@@ -410,7 +415,7 @@ export function usePageInteractions() {
       };
 
       const onScrollIntro = () => {
-        if (!isRafPending) {
+        if (window.innerWidth > 768 && !isRafPending) {
           requestAnimationFrame(calcIntroParallax);
           isRafPending = true;
         }

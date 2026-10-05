@@ -2,14 +2,14 @@ import React from 'react';
 
 /**
  * AboutBio component.
- * Displays biography statement, status indicator, and modern architectural profile vector graphic.
+ * Displays biography statement and status indicator.
  */
 export const AboutBio = ({ bio }) => {
   return (
     <section className="section about-image once-in">
-      <div className="container">
+      <div className="container medium">
         <div className="row">
-          <div className="flex-col">
+          <div className="flex-col about-bio-col">
             <div className="arrow">
               <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <title>arrow-up-right</title>
@@ -33,35 +33,6 @@ export const AboutBio = ({ bio }) => {
                 <span className="animate-dot">.</span>
               </span>
             </p>
-          </div>
-
-          {/* Abstract visual element replacing personal photo */}
-          <div className="flex-col">
-            <div className="single-about-image" style={{ minHeight: '440px', position: 'relative' }}>
-              <div className="about-abstract-graphic">
-                <div className="graphic-corner-tag">
-                  ARCHITECTURAL PROFILE // 2026
-                </div>
-                <div className="graphic-center-visual">
-                  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="60,10 105,35 105,85 60,110 15,85 15,35" fill="none" stroke="#455CE9" strokeWidth="1.5" />
-                    <polygon points="60,25 90,42 90,78 60,95 30,78 30,42" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.4" />
-                    <circle cx="60" cy="60" r="14" fill="#455CE9" fillOpacity="0.3" stroke="#455CE9" strokeWidth="1.5" />
-                    <line x1="60" y1="10" x2="60" y2="110" stroke="#455CE9" strokeWidth="0.8" strokeOpacity="0.3" strokeDasharray="3 3" />
-                    <line x1="15" y1="35" x2="105" y2="85" stroke="#455CE9" strokeWidth="0.8" strokeOpacity="0.3" strokeDasharray="3 3" />
-                  </svg>
-                </div>
-                <div className="graphic-footer-info">
-                  <div>
-                    <h4>Arun Vats</h4>
-                    <p>Full Stack &amp; AI Systems</p>
-                  </div>
-                  <div>
-                    <p style={{ color: '#455CE9', fontWeight: 600 }}>BIT MEERUT</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

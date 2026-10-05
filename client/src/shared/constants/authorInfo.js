@@ -11,7 +11,7 @@ export const AUTHOR_INFO = {
   socials: [
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/arun-vats-a819bb281' },
     { name: 'GitHub', url: 'https://github.com/vatsarun-dev' },
-    { name: 'HackerRank', url: 'https://www.hackerrank.com/profile/vatsarun58' },
+    { name: 'LeetCode', url: 'https://leetcode.com/u/vatsarun09/' },
     { name: 'Instagram', url: 'https://www.instagram.com/build.witharun/' },
   ],
 };

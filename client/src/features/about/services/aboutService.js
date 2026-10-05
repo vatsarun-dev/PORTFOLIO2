@@ -60,9 +60,9 @@ export const INITIAL_ABOUT_DATA = {
   ],
 
   certifications: [
-    'HackerRank Python Basic',
-    'HackerRank Java Basic',
-    'HackerRank JavaScript Intermediate',
+    'LeetCode Problem Solving',
+    'LeetCode Python & Java',
+    'Full Stack Web Development',
   ],
 
   skills: {
@@ -76,7 +76,7 @@ export const INITIAL_ABOUT_DATA = {
   socials: [
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/arun-vats-a819bb281' },
     { name: 'GitHub', url: 'https://github.com/vatsarun-dev' },
-    { name: 'HackerRank', url: 'https://www.hackerrank.com/profile/vatsarun58' },
+    { name: 'LeetCode', url: 'https://leetcode.com/u/vatsarun09/' },
     { name: 'Instagram', url: 'https://www.instagram.com/build.witharun/' },
   ],
 };
