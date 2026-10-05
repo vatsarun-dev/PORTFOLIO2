@@ -1,10 +1,105 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 /**
  * HeroHeader component for HomePage.
  * Includes the personal cutout image, interactive globe hanger, title, and marquee.
+ * The big name marquee runs continuously on both mobile and desktop with scroll velocity boost.
  */
 export const HeroHeader = ({ heroRef }) => {
+  const nameH1Ref = useRef(null);
+
+  useEffect(() => {
+    const el = nameH1Ref.current;
+    if (!el) return;
+
+    let xOffset = 0;
+    let direction = -1; // -1 = flows right-to-left
+    let velocityBoost = 0;
+    let lastScrollY = window.scrollY;
+    let lastTime = performance.now();
+    let rafId = null;
+    let singleWidth = 0;
+
+    const measure = () => {
+      if (!el) return;
+      const firstChild = el.querySelector('.name-wrap');
+      if (firstChild && firstChild.offsetWidth > 0) {
+        singleWidth = firstChild.offsetWidth;
+      } else if (el.scrollWidth > 0) {
+        singleWidth = el.scrollWidth / 4;
+      }
+    };
+
+    measure();
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measure).catch(() => {});
+    }
+
+    const t1 = setTimeout(measure, 100);
+    const t2 = setTimeout(measure, 400);
+
+    const onResize = () => {
+      measure();
+    };
+    window.addEventListener('resize', onResize);
+
+    const onScroll = () => {
+      const curScroll = window.scrollY;
+      const delta = Math.abs(curScroll - lastScrollY);
+      if (curScroll > lastScrollY + 1) {
+        direction = -1;
+      } else if (curScroll < lastScrollY - 1) {
+        direction = 1;
+      }
+      if (delta > 0) {
+        velocityBoost = Math.min(8, velocityBoost + delta * 0.4);
+      }
+      lastScrollY = curScroll;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    const animate = (now) => {
+      const deltaMs = Math.min(now - lastTime, 64);
+      lastTime = now;
+
+      if (singleWidth <= 0) {
+        measure();
+      }
+
+      const isMobile = window.innerWidth <= 768;
+      // Steady continuous speed: mobile ~0.08 px/ms (~80px/s), desktop ~0.095 px/ms (~95px/s)
+      const baseSpeed = isMobile ? 0.08 : 0.095;
+      const moveSpeed = baseSpeed * (1 + velocityBoost);
+
+      xOffset += direction * moveSpeed * deltaMs;
+      velocityBoost *= Math.pow(0.96, deltaMs / 16);
+      if (velocityBoost < 0.005) velocityBoost = 0;
+
+      if (singleWidth > 0) {
+        while (xOffset <= -singleWidth) {
+          xOffset += singleWidth;
+        }
+        while (xOffset > 0) {
+          xOffset -= singleWidth;
+        }
+      }
+
+      el.style.transform = `translate3d(${xOffset.toFixed(2)}px, 0, 0)`;
+      rafId = requestAnimationFrame(animate);
+    };
+
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   return (
     <header className="section home-header theme-dark" ref={heroRef}>
       <div className="hero-scale">
@@ -95,9 +190,19 @@ export const HeroHeader = ({ heroRef }) => {
           </div>
         </div>
 
-        {/* Huge Big Name Marquee */}
-        <div className="big-name">
-          <div className="name-h1">
+        {/* Huge Big Name Marquee - 4 repeating items for seamless infinite gliding */}
+        <div className="big-name" aria-hidden="true">
+          <div className="name-h1" ref={nameH1Ref}>
+            <div className="name-wrap">
+              <h1 className="no-select">
+                Arun Vats<span className="spacer">—</span>
+              </h1>
+            </div>
+            <div className="name-wrap">
+              <h1 className="no-select">
+                Arun Vats<span className="spacer">—</span>
+              </h1>
+            </div>
             <div className="name-wrap">
               <h1 className="no-select">
                 Arun Vats<span className="spacer">—</span>

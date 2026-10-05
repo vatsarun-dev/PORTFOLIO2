@@ -4,8 +4,9 @@ import App from '../App';
 import { PageLoader } from '../../shared/components/PageLoader/PageLoader';
 import { RouteErrorBoundary } from '../../shared/components/ErrorBoundary/RouteErrorBoundary';
 
+import HomePage from '../../features/home/pages/HomePage';
+
 // Route-level code splitting with React.lazy
-const HomePage = lazy(() => import('../../features/home/pages/HomePage'));
 const WorkPage = lazy(() => import('../../features/projects/pages/WorkPage'));
 const AboutPage = lazy(() => import('../../features/about/pages/AboutPage'));
 const ContactPage = lazy(() => import('../../features/contact/pages/ContactPage'));
@@ -18,19 +19,11 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <HomePage />
-          </Suspense>
-        ),
+        element: <HomePage />,
       },
       {
         path: 'index.html',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <HomePage />
-          </Suspense>
-        ),
+        element: <HomePage />,
       },
       {
         path: 'projects',
@@ -98,11 +91,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <HomePage />
-          </Suspense>
-        ),
+        element: <HomePage />,
       },
     ],
   },

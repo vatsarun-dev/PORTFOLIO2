@@ -359,6 +359,23 @@
     left: 0 !important;
     width: 100% !important;
     padding-bottom: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .home-header .big-name .name-h1 {
+    display: flex !important;
+    width: max-content !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    will-change: transform !important;
+  }
+
+  .home-header .big-name .name-wrap {
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
   }
 
   .home-header .container {
@@ -544,4 +561,25 @@
   font-size: clamp(2.2em, 5vw, 3.8em) !important;
   line-height: 1.1 !important;
   margin-bottom: 0.6em !important;
+}
+
+/* Hero Header Big Name Marquee continuous layout */
+.home-header .big-name {
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.home-header .big-name .name-h1 {
+  display: flex !important;
+  width: max-content !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  will-change: transform !important;
+}
+
+.home-header .big-name .name-wrap {
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
 }

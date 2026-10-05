@@ -197,63 +197,7 @@ export function usePageInteractions() {
       });
     }
 
-    // 5. Big-Name Infinite Marquee with Scroll Velocity
-    const bigNameWrap = document.querySelector('.home-header .big-name .name-h1');
-    if (bigNameWrap) {
-      let xOffset = 0;
-      let direction = -1;
-      let speed = 1;
-      let velocityBoost = 0;
-      let lastScrollY = window.scrollY;
-      let lastTime = performance.now();
-      let marqueeRaf = null;
-
-      const calcSpeed = () => {
-        const halfWidth = bigNameWrap.scrollWidth / 2;
-        speed = halfWidth > 0 ? halfWidth / 26000 : 1;
-      };
-      calcSpeed();
-      window.addEventListener('resize', calcSpeed);
-
-      const onScrollMarquee = () => {
-        const curScroll = window.scrollY;
-        const delta = Math.abs(curScroll - lastScrollY);
-        if (curScroll > lastScrollY + 1) {
-          direction = -1;
-        } else if (curScroll < lastScrollY - 1) {
-          direction = 1;
-        }
-        if (delta > 0) {
-          velocityBoost = Math.min(6, velocityBoost + delta * 0.35);
-        }
-        lastScrollY = curScroll;
-      };
-      window.addEventListener('scroll', onScrollMarquee, { passive: true });
-
-      const animateMarquee = (now) => {
-        const deltaMs = Math.min(now - lastTime, 48);
-        lastTime = now;
-
-        xOffset += direction * speed * (1 + velocityBoost) * deltaMs;
-        velocityBoost *= Math.pow(0.985, deltaMs / 16);
-        if (velocityBoost < 0.01) velocityBoost = 0;
-
-        const halfW = bigNameWrap.scrollWidth / 2;
-        if (halfW > 0) {
-          if (xOffset <= -halfW) xOffset += halfW;
-          if (xOffset > 0) xOffset -= halfW;
-        }
-        bigNameWrap.style.transform = `translateX(${xOffset.toFixed(2)}px)`;
-        marqueeRaf = requestAnimationFrame(animateMarquee);
-      };
-      marqueeRaf = requestAnimationFrame(animateMarquee);
-
-      cleanups.push(() => {
-        window.removeEventListener('resize', calcSpeed);
-        window.removeEventListener('scroll', onScrollMarquee);
-        if (marqueeRaf) cancelAnimationFrame(marqueeRaf);
-      });
-    }
+    // 5. Big-Name Infinite Marquee is managed directly by HeroHeader component via React ref for zero-latency initial load and continuous gliding.
 
     // 5b. Hero Personal Portrait Interactive Mouse Parallax (Dennis Snellenberg style)
     if (!prefersReduced && window.innerWidth > 720) {
